@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring.CoffeeBean.resume.mapper.IResumeMapper">
+
+	<resultMap type="ResInfo" id="ResContent">
+		<id property="resNo" column="res_no" />
+		<result property="resTitle" column="res_Title" />
+		<result property="resName" column="res_Name" />
+		<result property="resBirth" column="res_Birth" />
+		<result property="resEmail" column="res_Email" />
+		<result property="resPhone1" column="res_Phone1" />
+		<result property="resPhone2" column="res_Phone2" />
+		<result property="resPhone3" column="res_Phone3" />
+		<result property="resAddrbasic" column="res_Addrbasic" />
+		<result property="resAddrdetail" column="res_Addrdetail" />
+		<result property="resAddrzipnum" column="res_Addrzipnum" />
+		<result property="resUploadpath" column="res_Uploadpath" />
+		<result property="resRegdate" column="res_Regdate" />
+		<result property="userId" column="user_Id" />
+
+		<collection property="resEdu" resultMap="EduContent"></collection>
+		<collection property="resCrr" resultMap="CrrContent"></collection>
+		<collection property="resCert" resultMap="CertContent"></collection>
+		<collection property="resFile" resultMap="FileContent"></collection>
+		<collection property="reqStep" resultMap="StepContent"></collection>
+
+	</resultMap>
+	<resultMap type="com.spring.CoffeeBean.command.BoardVO"
+		id="BoardMap">
+		<id property="boardNo" column="rec_no" />
+		<result property="userId" column="user_id" />
+		<result property="boardTitle" column="rec_title" />
+		<result property="boardContent" column="rec_content" />
+		<result property="boardDate" column="rec_date" />
+		<result property="boardHit" column="hit" />
+	</resultMap>
+
+	<resultMap type="resFile" id="FileContent">
+		<id property="fileNo" column="file_no" />
+		<result property="fileUploadpath" column="file_uploadpath" />
+		<result property="fileLoca" column="file_loca" />
+		<result property="fileName" column="file_name" />
+		<result property="fileRealname" column="file_realname" />
+		<result property="fileRegdate" column="file_regdate" />
+	</resultMap>
+
+
+	<resultMap type="resEdu" id="EduContent">
+		<id property="eduNo" column="edu_no" />
+		<result property="eduOrg" column="edu_org" />
+		<result property="eduMjr" column="edu_mjr" />
+		<result property="eduAddt" column="edu_addt" />
+		<result property="eduGrdt" column="edu_grdt" />
+		<result property="eduState" column="edu_state" />
+	</resultMap>
+
+	<resultMap type="resCrr" id="CrrContent">
+		<id property="crrNo" column="crr_no" />
+		<result property="crrCom" column="crr_com" />
+		<result property="crrDept" column="crr_dept" />
+		<result property="crrPos" column="crr_pos" />
+		<result property="crrAddt" column="crr_addt" />
+		<result property="crrGrdt" column="crr_grdt" />
+	</resultMap>
+
+	<resultMap type="resCert" id="CertContent">
+		<id property="certNo" column="cert_no" />
+		<result property="certName" column="cert_name" />
+		<result property="certOrg" column="cert_org" />
+		<result property="certDate" column="cert_date" />
+	</resultMap>
+
+	<resultMap type="reqStep" id="StepContent">
+		<id property="volNo" column="vol_no" />
+		<result property="recNo" column="rec_no" />
+		<result property="userId" column="user_id" />
+		<result property="resNo" column="res_no" />
+		<result property="reqPreg" column="req_preg" />
+	</resultMap>
+
+
+
+
+	<!-- 이력서 인적사항 -->
+	<insert id="registInfo">
+		INSERT INTO
+		resinfo(res_no,res_name,res_birth,res_Phone1,res_Phone2,res_Phone3,res_Email,res_addrBasic,
+		res_addrDetail,res_regDate,res_title,user_id)
+		VALUES(default,#{resName},#{resBirth},#{resPhone1},#{resPhone2},#{resPhone3},#{resEmail},#{resAddrbasic},
+		#{resAddrdetail},default,#{resTitle},#{userId})
+	</insert>
+
+
+	<!-- 이력서 경력사항 -->
+	<insert id="registCrr">
+		<selectKey keyProperty="resNo" resultType="int"
+			order="BEFORE">
+			SELECT MAX(res_no) FROM resinfo
+		</selectKey>
+		INSERT INTO
+		rescrr(crr_no,crr_com,crr_dept,crr_pos,crr_addt,crr_grdt,res_no)
+		VALUES
+		<foreach collection="crrList" item="list" separator=" , ">
+			(default,#{list.crrCom},#{list.crrDept},#{list.crrPos},#{list.crrAddt},#{list.crrGrdt},#{resNo})
+		</foreach>
+	</insert>
+
+
+	<!-- 이력서 자격증 -->
+	<insert id="registCert">
+		<selectKey keyProperty="resNo" resultType="int"
+			order="BEFORE">
+			SELECT MAX(res_no) FROM resinfo
+		</selectKey>
+		INSERT INTO
+		rescert(cert_no,cert_name,cert_org,cert_date,res_no)
+		VALUES
+		<foreach collection="certList" item="list" separator=" , ">
+			(default,#{list.certName},#{list.certOrg},#{list.certDate},#{resNo})
+		</foreach>
+	</insert>
+
+
+	<!-- 이력서 학력사항 -->
+	<insert id="registEdu">
+		<selectKey keyProperty="resNo" resultType="int"
+			order="BEFORE">
+			SELECT MAX(res_no) FROM resinfo
+		</selectKey>
+		INSERT INTO
+		resedu(edu_no,edu_org,edu_mjr,edu_addt,edu_grdt,edu_state,res_no)
+		VALUES
+		<foreach collection="eduList" item="list" separator=" , ">
+			(default,#{list.eduOrg},#{list.eduMjr},#{list.eduAddt},#{list.eduGrdt},#{list.eduState},#{resNo})
+		</foreach>
+	</insert>
+
+
+	<!-- 이력서 파일 -->
+	<insert id="registFile">
+		<selectKey keyProperty="resNo" resultType="int"
+			order="BEFORE">
+			SELECT MAX(res_no) FROM resinfo
+		</selectKey>
+		INSERT INTO
+		resfile(file_no,file_uploadpath,file_loca,file_name,file_realname,file_regdate,res_no)
+		VALUES(default,#{fileUploadpath},#{fileLoca},#{fileName},#{fileRealname},default,#{resNo})
+	</insert>
+
+	<!-- 이력서 목록 조회 -->
+	<select id="getList" resultType="ResInfo">
+
+		SELECT *
+		FROM resinfo
+		WHERE user_id = #{id}
+		ORDER BY res_no ASC
+
+	</select>
+
+	<!-- 이력서 전체 수 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM resinfo
+	</select>
+
+	<!-- 이력서 상세보기 -->
+	<select id="getContent" resultMap="ResContent">
+
+		SELECT * FROM resinfo
+		JOIN resedu on resinfo.res_no = resedu.res_no
+		JOIN
+		rescrr on rescrr.res_no = resedu.res_no
+		JOIN rescert on rescert.res_no
+		= rescrr.res_no
+		JOIN resfile on resfile.res_no = rescert.res_no
+		WHERE
+		resinfo.res_no = #{resNo}
+
+	</select>
+
+	<update id="updateInfo">
+
+		UPDATE resinfo
+		SET
+		res_name=#{resName} ,res_birth=#{resBirth}
+		,res_phone1=#{resPhone1} ,res_phone2=#{resPhone2} ,
+		res_phone3=#{resPhone3},res_email=#{resEmail}
+		,res_addrbasic=#{resAddrbasic},
+		res_addrdetail=#{resAddrdetail}
+		,res_title=#{resTitle} ,res_regdate=default
+		WHERE
+		res_no=#{resNo}
+
+	</update>
+
+
+	<update id="updateCrr">
+		<foreach collection="crrList" item="list" separator=" ; ">
+
+			UPDATE rescrr
+			SET
+			crr_com=#{list.crrCom},crr_dept=#{list.crrDept},crr_pos=#{list.crrPos},
+			crr_addt=#{list.crrAddt},crr_grdt=#{list.crrGrdt}
+			WHERE
+			crr_no=#{list.crrNo}
+
+		</foreach>
+	</update>
+
+	<update id="updateCert">
+		<foreach collection="certList" item="list" separator=" ; ">
+
+			UPDATE rescert
+			SET
+			cert_name=#{list.certName},cert_org=#{list.certOrg},cert_date=#{list.certDate}
+			WHERE
+			cert_no=#{list.certNo}
+
+		</foreach>
+	</update>
+
+	<update id="updateEdu">
+		<foreach collection="eduList" item="list" separator=" ; ">
+
+			UPDATE resedu
+			SET
+			edu_org=#{list.eduOrg},edu_mjr=#{list.eduMjr},edu_addt=#{list.eduAddt},
+			edu_grdt=#{list.eduGrdt},edu_state=#{list.eduState}
+			WHERE
+			edu_no=#{list.eduNo}
+
+		</foreach>
+	</update>
+
+
+
+	<update id="updateFile">
+
+		UPDATE resfile
+		SET
+		file_uploadpath=#{fileUploadpath} ,file_loca=#{fileLoca}
+		,file_name=#{fileName} ,
+		file_realname=#{fileRealname}
+		,file_regdate=default
+		WHERE
+		res_no=#{resNo}
+
+	</update>
+
+	<delete id="delete">
+
+		DELETE resinfo,resedu,rescrr,rescert,resfile
+		FROM resinfo
+		INNER JOIN resedu on resinfo.res_no = resedu.res_no
+		INNER JOIN rescrr on
+		rescrr.res_no = resedu.res_no
+		INNER JOIN rescert on rescert.res_no =
+		rescrr.res_no
+		INNER JOIN resfile on resfile.res_no = rescert.res_no
+		WHERE resinfo.res_no = #{resNo}
+
+	</delete>
+
+
+	<insert id="apply">
+
+		INSERT INTO
+		reqstep (vol_no,rec_No,user_id,res_no,req_preg)
+		VALUES
+		(default,#{recNo},#{userId},#{resNo},default)
+
+	</insert>
+
+
+
+
+	<select id="ComgetContent" resultMap="ResContent">
+
+		SELECT * FROM resinfo
+		JOIN resedu on resinfo.res_no = resedu.res_no
+		JOIN
+		rescrr on rescrr.res_no = resedu.res_no
+		JOIN rescert on rescert.res_no
+		= rescrr.res_no
+		JOIN resfile on resfile.res_no = rescert.res_no
+		JOIN
+		reqstep on reqstep.res_no = resfile.res_no
+		WHERE resinfo.res_no =
+		#{resNo}
+
+	</select>
+
+	<update id="reqstepUpdate">
+
+		UPDATE reqstep
+		SET req_preg=#{reqPreg}
+		WHERE res_no=#{resNo}
+
+	</update>
+
+
+
+
+
+	<select id="avoidDuplication" resultType="int">
+
+		SELECT COUNT(res_no)
+		FROM reqstep
+		WHERE res_no = #{resNo}
+		AND rec_no = #{recNo};
+
+
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

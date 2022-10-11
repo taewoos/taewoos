@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+   namespace="com.spring.CoffeeBean.mypage.mapper.IMypageMapper">
+
+   <!-- 개인 -->
+   <resultMap type="ReqStep" id="ResReqStep">
+      <id property="volNo" column="vol_no" />
+      <result property="reqPreg" column="req_preg" />
+      <result property="resNo" column="res_no" />
+      <result property="recNo" column="rec_no" />
+      <result property="boardTitle" column="rec_title" />
+      <result property="boardDate" column="rec_date" />
+      <result property="fileLoca" column="file_loca" />
+      <result property="fileName" column="file_name" />
+   </resultMap>
+
+   <!-- 공고 -->
+   <resultMap type="ReqStep" id="RecReqStep">
+      <id property="volNo" column="vol_no" />
+      <result property="reqPreg" column="req_preg" />
+      <result property="resName" column="res_name" />
+      <result property="resNo" column="res_no" />
+      <result property="recNo" column="rec_no" />
+      <result property="boardTitle" column="rec_title" />
+      <result property="boardDate" column="rec_date" />
+      <result property="fileLoca" column="file_loca" />
+      <result property="fileName" column="file_name" />
+   </resultMap>
+
+   <!-- 관리자 -->
+   <resultMap type="user" id="userInfo">
+      <id property="userId" column="user_id" />
+      <result property="userPw" column="user_pw" />
+      <result property="userName" column="name" />
+      <result property="userEmail" column="email" />
+      <result property="userPhone1" column="phone_num1" />
+      <result property="userPhone2" column="phone_num2" />
+      <result property="userPhone3" column="phone_num3" />
+      <result property="idntNo" column="idnt_no" />
+      <result property="addrBasic" column="address_basic" />
+      <result property="addrZipNum" column="address_zipnum" />
+      <result property="addrDetail" column="address_detail" />
+      <result property="regDate" column="reg_date" />
+      <result property="businessNum" column="business_num" />
+      <result property="compName" column="comp_name" />
+      <result property="comAddrBasic" column="com_address_basic" />
+      <result property="comAddrDetail" column="com_address_detail" />
+      <result property="comAddrZipNum" column="com_address_zipnum" />
+      <result property="ceo" column="ceo" />
+      <result property="userBirthYear" column="user_birth_year" />
+      <result property="userBirthMonth" column="user_birth_month" />
+      <result property="userBirthDay" column="user_birth_day" />
+      <result property="gender" column="gender" />
+      <result property="corType" column="cor_type" />
+
+   </resultMap>
+   
+      <!-- 통계 -->
+   <resultMap type="Statistics" id="Statistics">
+      <id property="userId" column="user_id" />
+      <result property="statisticsNo" column="statistics_no" />
+      <result property="statisticsTitle" column="statistics_title" />
+      <result property="statisticsContent" column="statistics_content" />
+
+
+
+   </resultMap>
+
+
+
+   <select id="getResStep" resultMap="ResReqStep">
+
+      SELECT
+      reqstep.req_preg,
+      reqstep.res_no,
+      recruitment.rec_no,
+      recruitment.rec_date,
+      recruitment.rec_title,
+      recruitment.file_loca,
+      recruitment.file_name
+      FROM reqstep
+      JOIN recruitment ON reqstep.rec_no = recruitment.rec_no
+      WHERE reqstep.user_id = #{id};
+
+   </select>
+
+   <select id="getRecStep" resultMap="RecReqStep">
+
+      SELECT
+      reqstep.req_preg,
+      reqstep.res_no,
+      resinfo.res_name,
+      recruitment.rec_no,
+      recruitment.rec_date,
+      recruitment.rec_title,
+      recruitment.file_loca,
+      recruitment.file_name
+      FROM recruitment
+      JOIN reqstep ON recruitment.rec_no = reqstep.rec_no
+      JOIN resinfo ON reqstep.res_no = resinfo.res_no
+      WHERE recruitment.user_id = #{id};
+
+   </select>
+   
+      <select id="getStatistics" resultMap="Statistics">
+
+      SELECT
+      statistics.statistics_no,
+      statistics.user_id,
+      statistics.statistics_title,
+      statistics.statistics_content
+
+      FROM statistics
+
+      WHERE statistics.user_id = #{id};
+
+   </select>
+   
+
+
+
+
+
+
+   <select id="getResAll" resultType="int">
+
+      SELECT COUNT(res_no)
+      FROM resinfo
+      WHERE user_id = #{id}
+
+   </select>
+
+   <select id="getMsgAll" resultType="int">
+
+      SELECT COUNT(msg_no)
+      FROM message
+      WHERE user_id = #{id}
+
+   </select>
+   
+      <select id="getUserAll" resultType="int">
+
+      SELECT COUNT(user_id)
+      FROM user
+      WHERE idnt_no = '1'
+
+   </select>
+
+
+   <select id="getRecAll" resultType="int">
+
+      SELECT COUNT(rec_no)
+      FROM recruitment
+      WHERE user_id = #{id}
+
+   </select>
+
+
+   <select id="getComAll" resultType="int">
+
+      SELECT COUNT(user_id)
+      FROM user
+      WHERE idnt_no = '7'
+
+   </select>
+
+   <select id="waitingJoin" resultMap="userInfo">
+
+      SELECT *
+      FROM user
+      WHERE idnt_no = '7'
+
+   </select>
+   
+      <select id="user" resultMap="userInfo">
+
+      SELECT *
+      FROM user
+      WHERE idnt_no = '1'
+
+   </select>
+
+   <select id="getComDetail" resultMap="userInfo">
+
+      SELECT *
+      FROM user
+      WHERE user_id = #{id}
+
+
+   </select>
+
+   <update id="idntNoUpdate">
+
+      UPDATE user
+      SET idnt_no='2'
+      WHERE user_id=#{id}
+
+   </update>
+   
+      <select id="getUserDetail" resultMap="userInfo">
+
+      SELECT *
+      FROM user
+      WHERE user_id = #{id}
+
+
+   </select>
+
+   <update id="useridntNoUpdate">
+
+      UPDATE user
+      SET idnt_no='8'
+      WHERE user_id=#{id}
+
+   </update>
+
+
+
+
+
+</mapper>

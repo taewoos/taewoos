@@ -1,0 +1,142 @@
+.tab{height: 80px;
+    width: 100%; 
+    top: 0; 
+    left: 0;
+}
+
+.tab a:hover {
+    text-decoration: none;
+    color: rgb(75, 73, 73);
+}
+.tab a:focus {
+    text-decoration: none;
+}
+
+
+.choice{
+    display: flex; 
+    height: 20px; 
+    /* justify-content: space-around;  */
+    position: relative; 
+    left: 50%; 
+    bottom: 0; 
+    transform: translateX(-50%); 
+    font-size: 15px;
+}
+.panel{
+    width: 20%; 
+    border-radius: 5px; 
+    height: 50px; 
+    display: inline-block; 
+    background-color: rgb(51 122 183 / 30%);
+    text-align: center; 
+    line-height: 50px; 
+    color: black;
+}
+.active{
+	background-color: rgba(51, 122, 183) !important; 
+    color:white !important;
+}
+
+.content{display: none;}
+.on{display: block !important;}
+
+.paging{
+    text-align: center;
+    font-size: 16px;
+    font-weight: lighter;
+}
+.paging a {
+    text-decoration: none;
+    color: black;
+    margin: 5px;
+}
+.sibal{
+	width: 100%;
+}
+
+.sibal .js-load {
+	width: 100%;
+    display: none;
+}
+.js-load.mactive {
+    display: block;
+    width: 100%;
+}
+.is_comp.js-load:after {
+    display: none;
+}
+.btn-wrap, .lists {
+    display: block;
+}
+.sibal2{
+	width: 100%;
+}
+
+.sibal2 .js-load2 {
+	width: 100%;
+    display: none;
+}
+.js-load2.mactive {
+    display: block;
+    width: 100%;
+}
+.is_comp2.js-load2:after {
+    display: none;
+}
+.btn-wrap2, .lists {
+    display: block;
+}
+
+/* message-content 페이지 */
+section {
+    margin: 200px auto;
+    width: 50%;
+}
+
+section table {
+    border: 1px solid rgb(221, 221, 221);
+    margin: 0 auto;
+    
+}
+table thead tbody {
+	width: 100%;
+}
+
+.title {
+    margin: 10px auto 50px;
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: rgb(58, 129, 195);
+    font-size: 20px;
+    vertical-align: middle;
+    color: white;
+}
+
+.gray {
+    background-color: rgba(221, 221, 221, 0.496);
+}
+
+.message-content {
+    height: 300px;
+    vertical-align: middle;
+}
+
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+
+
+button.close {
+	
+    margin-right: 15px;
+    margin-top: 5px;
+    font-size: 40px;
+    color: #0080ff;
+	
+}

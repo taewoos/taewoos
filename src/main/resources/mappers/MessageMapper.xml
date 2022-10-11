@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.CoffeeBean.message.mapper.IMessageMapper">
+		
+	
+	<insert id="send">
+		INSERT INTO message
+		(user_id, msg_title, msg_content, receiver, msg_date)
+		VALUES(#{userId}, #{msgTitle}, #{msgContent}, #{receiver},CURRENT_TIMESTAMP() )
+	</insert>
+	
+	<select id="getMessage" resultType="message">
+		SELECT * FROM message
+		WHERE receiver=#{id}
+		ORDER BY msg_date DESC
+	</select>
+	
+	<select id="sendMessage" resultType="message">
+		SELECT * FROM message
+		WHERE user_id=#{id}
+		ORDER BY msg_date DESC
+	</select>
+	
+	<select id="getMsgCount" resultType="int">
+		SELECT COUNT(*)
+		FROM message
+		WHERE receiver=#{id}
+	</select>
+	
+	<select id="sendMsgCount" resultType="int">
+		SELECT COUNT(*)
+		FROM message
+		WHERE user_id=#{id}
+	</select>
+	
+	<select id="viewDetail" resultType="message">
+		SELECT * FROM message
+		WHERE msg_no=#{msgNo}
+	</select>
+	
+	<delete id="delMessage">
+		DELETE FROM message
+		WHERE msg_no = #{msgNo}
+	</delete>
+	
+	
+	<select id="pagingMessage" resultType="message">
+		SELECT R1.* FROM
+		(SELECT * FROM message
+		WHERE receiver=#{id}
+		ORDER BY msg_date DESC) R1
+		LIMIT 5 OFFSET #{no}
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

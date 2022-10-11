@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring.CoffeeBean.board.mapper.IBoardMapper">
+
+	<resultMap type="com.spring.CoffeeBean.command.BoardVO" id="BoardMap">
+		<id property="boardNo" column="rec_no" />
+		<result property="userId" column="user_id" />
+		<result property="boardTitle" column="rec_title" />
+		<result property="boardContent" column="rec_content" />
+		<result property="boardDate" column="rec_date" />
+		<result property="fileUploadpath" column="file_uploadpath" />
+		<result property="fileLoca" column="file_loca" />
+		<result property="fileName" column="file_name" />
+		<result property="fileRealname" column="file_realname" />
+
+	</resultMap>
+
+	<sql id="search">
+		<if test="condition == 'title'">
+			WHERE rec_title LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'content'">
+			WHERE rec_content LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'writer'">
+			WHERE user_id LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'titleContent'">
+			WHERE rec_title LIKE CONCAT('%',#{keyword},'%')
+			OR rec_content LIKE CONCAT('%',#{keyword},'%')
+		</if>
+	</sql>
+
+	<insert id="regist">
+		INSERT INTO recruitment(rec_title, user_id, rec_content,file_uploadpath,file_loca,file_name,file_realname)
+		VALUES(#{boardTitle}, #{userId}, #{boardContent},#{fileUploadpath},#{fileLoca},#{fileName},#{fileRealname})
+	</insert>
+
+
+	<select id="getList" resultMap="BoardMap">
+		SELECT * FROM recruitment
+		<include refid="search" />
+		ORDER BY rec_no DESC
+		LiMIT #{pageStart}, #{cpp}
+	</select>
+
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM recruitment
+		<include refid="search" />
+	</select>
+
+	<select id="getContent" resultMap="BoardMap">
+		SELECT * FROM recruitment
+		WHERE rec_no = #{boardNo}
+	</select>
+
+	<update id="update">
+		UPDATE recruitment SET rec_title=#{boardTitle},
+		rec_content=#{boardContent}
+		WHERE rec_no=#{boardNo}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM recruitment
+		WHERE rec_no=#{boardNo}
+	</delete>
+	
+	<update id="hit" parameterType="int">
+		UPDATE recruitment SET hit = hit + 1
+		WHERE rec_no = #{boardNo}
+	</update>
+	
+		<select id="getTitle" resultMap="BoardMap">
+		SELECT * FROM recruitment
+		ORDER BY rec_no
+		LiMIT 0 , 4
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

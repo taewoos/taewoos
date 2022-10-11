@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.CoffeeBean.user.mapper.IUserMapper">
+
+
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*) FROM user
+		WHERE
+		user_id = #{id}
+	</select>
+
+	<insert id="join">
+		INSERT INTO user
+		(user_id, user_pw, name, phone_num1, phone_num2, phone_num3, email,
+		address_basic, address_detail, address_zipnum, user_birth_year, user_birth_month, user_birth_day, idnt_no, gender, regDate )
+		VALUES(#{userId}, #{userPw}, #{userName}, #{userPhone1}, #{userPhone2}, #{userPhone3}, #{userEmail},
+		#{addrBasic}, #{addrDetail}, #{addrZipNum},  #{userBirthYear},  #{userBirthMonth},  #{userBirthDay}, #{idntNo},#{gender}, CURRENT_TIMESTAMP())
+	</insert> 
+	
+<!-- 	<insert id="join2">
+		INSERT INTO user
+		(user_id, user_pw, idnt_no, cor_type, business_num, comp_name,
+		ceo, com_address_zipnum, com_address_basic, com_address_detail,
+		name, phone_num1, phone_num2, phone_num3, email, regDate)
+		VALUES(#{userId}, #{userPw}, #{idntNo}, #{corType}, #{businessNum}, #{compName},
+		#{ceo}, #{comAddrZipNum}, #{comAddrBasic}, #{comAddrDetail},
+		#{userName}, #{userPhone1}, #{userPhone2}, #{userPhone3}, #{userEmail}, CURRENT_TIMESTAMP())
+	</insert>  -->
+	
+	 <insert id="join2">
+      INSERT INTO user
+      (user_id, user_pw, idnt_no, cor_type, business_num, comp_name,
+      ceo, com_address_zipnum, com_address_basic, com_address_detail,
+      name, phone_num1, phone_num2, phone_num3, email, regDate,
+      file_uploadpath, file_loca, file_name, file_realname , file_regdate)
+      VALUES(#{userId}, #{userPw}, #{idntNo}, #{corType}, #{businessNum}, #{compName},
+      #{ceo}, #{comAddrZipNum}, #{comAddrBasic}, #{comAddrDetail},
+      #{userName}, #{userPhone1}, #{userPhone2}, #{userPhone3}, #{userEmail}, CURRENT_TIMESTAMP(),
+      #{fileUploadpath},#{fileLoca},#{fileName},#{fileRealname},default)
+   </insert> 
+	
+
+	<select id="login" resultType="user">
+		SELECT user_id as userId,user_pw as userPw, name as userName, email as userEmail, phone_num1 as userPhone1,
+		 phone_num2 as userPhone2, phone_num3 as userPhone3, idnt_no as idntNo, address_basic as addrBasic, address_detail as addrZipNum, 
+		 address_zipnum as addrDetail, regDate, business_num as businessNum, comp_name as compName, com_address_basic as comAddrBasic, 
+		 com_address_detail as comAddrDetail, com_address_zipnum as comAddrZipNum, ceo, user_birth_year as userBirthYear, user_birth_month as userBirthMonth, user_birth_day as userBirthDay, 
+		 gender as gender, cor_type as corType          		
+		FROM user
+		WHERE user_id = #{id}
+		AND user_pw = #{pw}
+	</select>
+	
+	<select id="login2" resultType="user">
+		SELECT user_id as userId,user_pw as userPw, name as userName, email as userEmail, phone_num1 as userPhone1,
+		 phone_num2 as userPhone2, phone_num3 as userPhone3, idnt_no as idntNo, address_basic as addrBasic, address_detail as addrZipNum, 
+		 address_zipnum as addrDetail, regDate, business_num as businessNum, comp_name as compName, com_address_basic as comAddrBasic, 
+		 com_address_detail as comAddrDetail, com_address_zipnum as comAddrZipNum, ceo, user_birth_year as userBirthYear, user_birth_month as userBirthMonth, user_birth_day as userBirthDay, 
+		 gender as gender, cor_type as corType          		
+		FROM user
+		WHERE user_id = #{id}
+		AND user_pw = #{pw} AND idnt_no = #{idno}
+	</select>
+	
+	<select id="userFind" resultType="user">
+		SELECT user_id as userId, idnt_no as IdntNo
+		FROM user
+		WHERE name = #{userName} AND phone_num1 = #{userPhone1} 
+		AND phone_num2 = #{userPhone2} AND phone_num3 = #{userPhone3}
+	</select>
+	
+	<select id="pwFind" resultType="user">
+		SELECT user_id as userId
+		FROM user
+		WHERE name = #{userName} AND phone_num1 = #{userPhone1} 
+		AND phone_num2 = #{userPhone2} AND phone_num3 = #{userPhone3}
+		AND user_id = #{userId}
+	</select>
+		
+	<update id="updateUser">
+		UPDATE user
+    	SET name = #{userName}, gender = #{gender},
+    	user_birth_year = #{userBirthYear}, user_birth_month = #{userBirthMonth}, user_birth_day = #{userBirthDay}, 
+		email = #{userEmail},phone_num1 = #{userPhone1}, 
+		phone_num2 = #{userPhone2}, phone_num3 = #{userPhone3},
+		address_basic = #{addrBasic}, address_detail = #{addrDetail},
+		address_zipnum = #{addrZipNum}
+		WHERE user_id = #{userId}
+	</update> 
+	
+	<update id="pwUpdate">
+		UPDATE user
+    	SET user_pw = #{userPw}
+		WHERE user_id = #{userId}
+	</update>
+	
+	<update id="updateUser2">
+		UPDATE user
+    	SET name = #{userName}, email = #{userEmail}, 
+    	phone_num1 = #{userPhone1}, phone_num2 = #{userPhone2}, 
+    	phone_num3 = #{userPhone3}
+		WHERE user_id = #{userId}
+	</update>
+	
+	<!-- 유저 정보 가져오기 -->
+	<select id="getInfo" resultType="user">
+		SELECT user_id as userId,user_pw as userPw, name as userName, email as userEmail, phone_num1 as userPhone1,
+		 phone_num2 as userPhone2, phone_num3 as userPhone3, idnt_no as idntNo, address_basic as addrBasic, address_detail as addrZipNum, 
+		 address_zipnum as addrDetail, regDate, business_num as businessNum, comp_name as compName, com_address_basic as comAddrBasic, 
+		 com_address_detail as comAddrDetail, com_address_zipnum as comAddrZipNum, ceo, user_birth_year as userBirthYear, user_birth_month as userBirthMonth, user_birth_day as userBirthDay, 
+		 gender as gender, cor_type as corType, file_loca as fileLoca, file_name as fileName      		
+		FROM user
+		WHERE user_id = #{id}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

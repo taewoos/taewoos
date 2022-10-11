@@ -1,0 +1,184 @@
+#mypage_body{
+    position: relative;
+
+}
+
+h1{
+    display: inline-block;
+}
+
+.row h2{
+    font-size: 1.5em;
+    margin-left: 15px;
+    letter-spacing: 3px;
+    word-spacing: 1px;
+    margin-bottom:0;
+    padding-bottom:10px;
+}
+.btn { 
+    
+    padding: 10px;
+ 
+}
+
+.resume_count {
+    font-weight: bold;
+    color: blue;
+}
+
+.user_count {
+    font-weight: bold;
+    color: blue;
+}
+
+.btn-list {
+    background: #0080ff;
+    color: white;
+}
+#a,#b,#c {
+
+    font-size: 1.2em;
+    margin: 0;
+    margin-left: 0px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
+
+.contents{
+    margin: 0;
+    padding: 0;
+    background: #0080ff;
+}
+
+#d, #e, #f{
+    background: silver;
+    color: white;
+    margin: 0;
+    padding: 10px;
+    font-size: 1.3em;
+    text-align: center;
+}
+#g{
+    margin-left: 30px;
+    padding: 0 auto;
+}
+#f {
+    margin: 200px;
+
+}
+#comp_image{
+    max-width: 50px;
+    max-height: 50px;
+}
+
+#stat_img {
+    max-width: 250px;
+    max-height: 250px;
+}
+td{
+
+
+}
+.table{
+    margin: auto;
+    padding: 0 auto;
+}
+
+#situ { 
+    margin-left: 650px;
+    margin-top: 30px;
+
+}
+
+.statistics_title{
+    color: black;
+    display : inline-block;
+    margin-bottom: 0px;
+    padding: 50px;
+    font-size: 25px;
+    margin-left : 38%;
+
+}
+.table tr > th, td {
+
+    padding: 50%;
+    margin: 50%;
+    text-align: center;
+} 
+
+ #stat_header {
+
+    background-color: skyblue;
+
+} 
+#stats_img{
+    height:600px;
+    width: 600px;
+}
+#stats_font{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+.row.my_Information {
+   margin: 0 0 30px 50px;
+}
+
+.myPage_wrap {
+   margin-top:130px;
+}
+.my_Information .btn-modify,
+.my_Information .btn-list {   
+   margin: 10px 120px 20px 0;
+}
+.my_list_wrap {
+   margin: 0;
+}
+.my_Information strong {
+   color: #9dcbf9;
+   font-size: 1.2em;
+}
+#a .myUser_h2 {   
+    margin-top: 14px;   
+}
+
+#a h2,
+#b h2,
+#c h2 {
+	text-align: center;
+}
+.myPage_wrap .my_title {
+   border-bottom: 2px solid gray;
+   margin-bottom: 40px;
+   font-size: 2.8em;
+   padding-bottom: 10px;
+   margin-left: 20px;
+}
+div#b {
+    border-right: 1px dotted  #DDDDDD;
+    border-left: 1px dotted #DDDDDD;
+}
+#Pass,
+#Close,
+#Fail {
+	float:right;
+	margin-top:10px;
+	margin-right: 10px;
+}
+#adminUserModal button#Pass {
+	float:right;
+	margin-right: 10px;
+	margin-top: 0;
+}
+
+#adminUserModal button#Close {
+	float:right;
+	margin-top: 0;
+}
+
+#Fail {
+   
+   float: left;
+   margin-top :35px;
+}

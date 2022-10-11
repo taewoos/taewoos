@@ -1,0 +1,248 @@
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+/* ================ res_write ================ */
+.form-group {
+    margin: 0;
+    padding: 0 10px 0 0;
+}
+.input-group {
+    margin: 0;
+    padding: 0;    
+}
+.res_info .per_info{
+   width: 80%;
+}
+/* ================ 제일바깥 ================ */
+.res_write_out_wrap {
+    margin-top: 130px;
+}
+.res_write_out_wrap .res_write_title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* ================ 폼태그 ================ */
+.res_write_inner_wrap h3 {
+    font-weight: bold;
+}
+.res_write_inner_wrap .res_write_con {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-top: 1px solid rgb(222, 219, 219);
+    position: relative;
+}
+.res_write_inner_wrap .res_write_con .btn {
+    margin-top: 10px;
+}
+
+.res_write_inner_wrap .res_info {
+    margin-bottom: 20px;
+}
+.res_write_inner_wrap .res_info .picture {
+    padding: 5px;
+    border: 1px solid #0080ff;
+    background: #bdd5ec2b;
+    text-align: center;
+    font-size: 1.2em;
+    float: left;
+    width: 150px;
+    height: 200px;
+}
+
+.res_write_inner_wrap .res_info .picture .form-label {
+    line-height: 200px;
+}
+.res_write_inner_wrap .res_info .picture .form-label:hover{
+    color: #0080ff;
+}
+
+.res_write_inner_wrap .res_info .form-group {
+    margin: 6px;
+}
+
+
+
+/* ================ 이력서등록,취소버튼 ================ */
+.res_write_btn_wrap {
+    position: relative;
+    margin-bottom: 30px;
+}
+.res_insert_btn {
+    font-size: 1.3em;
+    position: absolute;
+    top: 65px;
+    left: 500px;
+}
+.res_cancel_btn {
+    font-size: 1.3em;
+    position: absolute;
+    top: 10px;
+    left: 630px;
+    
+    
+}
+
+.res_del_btn {   
+   font-size: 1.3em;
+    position: absolute;
+    top: 10px;
+    left: 420px;
+}
+
+/* ======================= 이력서 상세조회,전형단계 확인 ====================== */
+
+.res_check_wrap {   
+    margin-top: 130px;   
+}
+.res_check_wrap > h1,h2,h3,h4,h5 {
+    font-weight: bold;
+    text-align: start;
+}
+.res_check_prog {
+    margin: 100px auto;
+
+}
+
+.res_check_picture {
+    width: 150px;
+    height: 200px;
+    
+}
+
+.res_check_prog > h2 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+/* ======================= css수정(정원) ====================== */
+section.res_main_container {   
+    margin-top: 150px;   
+}
+.container.res_list {   
+    margin-bottom: 300px;   
+}
+.res_list .res_list_btn {
+   margin-top: 15px;
+}
+form.navbar-form.navbar-right.res_search {
+   margin: 15px 0;
+}
+.res_list th.res_th2 {
+   width: 65%;
+}
+.res_list th.res_th3 {
+   width: 25%;
+}
+.res_phone {
+   float: left;
+   margin-right: 8px;
+}
+.res_ph_wrap {
+   width: 80%;
+}
+.res_ph_wrap .res_ph_input_wrap {
+   width: 100%;
+}
+.res_ph_input_wrap .res_phone {
+   display:inline-block;
+   float:left;
+}
+.res_ph_input_wrap .res_phone2 {
+   margin: 8px 5px 0 5px;
+}
+.addr input#resAddrZipNum {
+   width: 496.5px;
+}
+.addr button.btn.btn-insert {
+   margin-top: 0px;
+}
+div#certWrap {
+   margin-bottom: 50px;
+}
+.res_check_wrap h2.res_userName {
+   margin: 0;
+   padding: 15px 0 10px 0;
+}
+.res_check_wrap .res_summary {   
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 20px;
+}
+.res_check_wrap table.rec_check_list {
+   text-align: center;
+}
+
+/* ======================= css수정(정우) ====================== */
+
+/* 이력서 내용 접고 펴기 */
+
+.ResDetail_wrap a {
+   cursor: pointer;
+}
+
+.ResDetail {
+   display:none;
+}
+
+/* date 타입 placeholder 설정 */
+
+input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  display: none;
+}
+
+
+#ResregistBtn,#WriteBtn {
+   
+   margin-top :15px;
+}
+
+#registBtn2 {
+   
+   margin-top :15px;
+   position: absolute;
+    top: -5px;
+    
+}
+
+#registBtn1 {
+   
+   margin-top :10px;
+
+}
+
+
+
+
+#excelDownload {
+   
+   margin-top :20px;
+}
+
+
+.GetComdetail {
+   
+
+   cursor: zoom-in;
+}
+.col-md-2.fileDiv {
+	width: 200px;
+	height: 200px;
+}
+.col-md-2.fileDiv img {
+	width: 200px;
+	height: 200px;
+	object-fit:cover;
+}

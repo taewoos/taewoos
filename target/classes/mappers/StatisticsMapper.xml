@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring.CoffeeBean.statistics.mapper.IStatisticsMapper">
+
+	<resultMap type="com.spring.CoffeeBean.command.StatisticsVO" id="StatisticsMap">
+		<id property="statisticsNo" column="statistics_no" />
+		<result property="userId" column="user_id" />
+		<result property="statisticsTitle" column="statistics_title" />
+		<result property="statisticsContent" column="statistics_content" />
+		<result property="statisticsDate" column="statistics_date" />
+		<result property="statisticsHit" column="statistics_hit" />
+		<result property="statisticsFile" column="statistics_file" />
+	</resultMap>
+
+	<sql id="search">
+		<if test="condition == 'title'">
+			WHERE statistics_title LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'content'">
+			WHERE statistics_content LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'writer'">
+			WHERE user_id LIKE CONCAT('%',#{keyword},'%')
+		</if>
+		<if test="condition == 'titleContent'">
+			WHERE statistics_title LIKE CONCAT('%',#{keyword},'%')
+			OR statistics_content LIKE CONCAT('%',#{keyword},'%')
+		</if>
+	</sql>
+
+	<insert id="regist">
+		INSERT INTO statistics(statistics_title, user_id, statistics_content)
+		VALUES(#{statisticsTitle}, #{userId}, #{statisticsContent})
+	</insert>
+
+
+	<select id="getList" resultMap="StatisticsMap">
+		SELECT * FROM statistics
+		<include refid="search" />
+		ORDER BY statistics_no DESC
+		LiMIT #{pageStart}, #{cpp}
+	</select>
+
+	<select id="getTitle" resultMap="StatisticsMap">
+		SELECT * FROM statistics
+		ORDER BY statistics_no
+		LiMIT 0 , 5
+	</select>
+
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM statistics
+		<include refid="search" />
+	</select>
+
+	<select id="getContent" resultMap="StatisticsMap">
+		SELECT * FROM statistics
+		WHERE statistics_no = #{statisticsNo}
+	</select>
+
+	<update id="update">
+		UPDATE statistics SET statistics_title=#{statisticsTitle},
+		statistics_content=#{statisticsContent}
+		WHERE statistics_no=#{statisticsNo}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM statistics
+		WHERE statistics_no=#{statisticsNo}
+	</delete>
+	
+	<update id="updatereStatisticsHit" parameterType="int">
+		UPDATE statistics SET statistics_hit = statistics_hit + 1
+		WHERE statistics_no = #{statisticsNo}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

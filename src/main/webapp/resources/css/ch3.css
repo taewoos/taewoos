@@ -1,0 +1,104 @@
+
+/*테이블 디자인*/
+th{
+    text-align: center;
+}
+
+.navbar-form{
+    margin-right: -85px;
+    margin-top: 50px;
+}
+
+.main_container{
+    width: 1000px;
+    margin: 100px auto;
+}
+.ch3_title strong{
+    font-size: 3rem;
+    
+}
+ .ch3_title{
+    margin-top: 120px;
+    border-bottom: 2px solid black;
+ }
+
+.table{
+    text-align: center;
+}
+
+body { 
+    font-size: 140%; 
+  }
+
+h2 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+table caption {
+    padding: .5em 0;
+  }
+
+  table.dataTable th,
+  table.dataTable td {
+    white-space: nowrap;
+  }
+  
+.p {
+  text-align: center;
+  padding-top: 140px;
+  font-size: 14px;
+}
+/*버튼 디자인 + 페이징*/
+.board_page {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0;
+}
+
+.board_page a {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    border-left: 0;
+    line-height: 100%;
+}
+
+.board_page a.bt {
+    padding-top: 10px;
+    font-size: 1.2rem;
+    letter-spacing: -1px;
+}
+
+.board_page a.num {
+    padding-top: 9px;
+    font-size: 1.4rem;
+}
+.board_page a:first-child {
+    border-left: 1px solid #ddd;
+}
+.btn-insert{
+    background: #0080ff;
+    color: white;
+    float: right;
+    margin-top: -55px;
+}
+.btn-modify {
+    background: #0080ff;
+    color: white;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.btn-del {
+    background: #ff7e00;
+    color: white;
+    float: right;
+    margin-top: 5px;
+    
+
+}

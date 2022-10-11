@@ -1,0 +1,143 @@
+section {
+    padding: 50px;
+    margin: 150px auto 0px;
+}
+
+.titlebox {
+width: 250px;
+text-align: center;
+height: 40px;
+line-height: 40px;
+margin: 70px auto 20px;
+font-size: 30px;
+}
+
+.join-form {
+    margin: 0 auto;
+    float: none;
+}
+
+.join-form form {
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.input-group-addon {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.form-control, form-group .btn {
+    border-radius: 0;
+}
+
+.form-control:hover {
+    border-color: #555;
+}
+
+.tab{height: 80px;
+     width: 100%; 
+     top: 0; 
+     left: 0;
+}
+a:hover {
+    text-decoration: none;
+    color: rgb(75, 73, 73);
+}
+a:focus {
+    text-decoration: none;
+}
+
+.choice{
+    display: flex; 
+    height: 50px; 
+    justify-content: space-around; 
+    position: relative; 
+    left: 50%; 
+    bottom: 0; 
+    transform: translateX(-50%); 
+    font-size: 25px;
+}
+.panel{
+    width: 50%; 
+    border-radius: 5px; 
+    height: 50px; 
+    display: inline-block; 
+    background-color: rgb(224, 224, 224); 
+    text-align: center; 
+    line-height: 50px; 
+    color: black;
+}
+.active{background-color: #0080ff  !important; 
+    color:white !important;
+}
+.content{display: none;}
+.on{display: block !important;}
+
+.down{
+    display: block !important;
+}
+.up{display: none;}
+
+.agree {
+    width: 70%;
+    margin: 0 auto 50px;
+    border-radius: 8px;
+    padding: 15px;
+    /* 
+        box-shadow: 1, 2, 3, 4, color
+        1: 수평 방향 그림자 위치 -> 양수: 오른쪽, 음수: 왼쪽
+        2: 수직 방향 그림자 위치 -> 양수: 박스 아래, 음수: 박스 위
+        3. 그림자 선명도 -> 양수: 그림자 끝이 흐려짐, 음수: x
+        4. 그림자 확산 거리 -> 양수: 확대, 음수: 축소
+        color: 그림자의 색상.
+    */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.agree1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.title {
+    font-size: 25px;
+}
+
+.hp_con {
+    float: left;
+    margin-right: 8px;
+}
+
+.hp_con2 {
+	
+    margin-top: 5px;
+}
+.input-group.hp_con.hp_input {
+	width: 30%;
+}
+
+.comp_email {
+    margin-top: 50px;
+}
+
+.btn-insert {
+    font-size: 25px;
+}
+
+label {
+   margin-top: 10px;
+}
+#addrBasic,
+#addrDetail {
+	width: 100%;
+}
+
+.userinfoModi_wrap {
+	
+    padding-top: 0px;
+    margin-top: 100px;
+	
+}
